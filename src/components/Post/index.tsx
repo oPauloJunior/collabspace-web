@@ -1,44 +1,62 @@
 import Avatar from "../Avatar";
-import { Container, Content, Hastags, Divider } from "./styles";
+import Comment from "../Comment";
+import {
+  Container,
+  Content,
+  Hastags,
+  Divider,
+  Comments,
+  Header,
+  AuthorInfo,
+  Author,
+  Description,
+  CommentForm,
+} from "./styles";
 
 const Post: React.FC = () => {
   return (
     <Container>
-      <header>
-        <div>
+      <Header>
+        <Author>
           <Avatar />
 
-          <section>
+          <AuthorInfo>
             <h1>Paulo Junior</h1>
             <p>paulojunior2009@outlook.com</p>
-          </section>
-        </div>
+          </AuthorInfo>
+        </Author>
 
-        <p>Publicado à 1h</p>
-      </header>
+        <time>Publicado à 1h</time>
+      </Header>
 
-      <main>
-        <Content>
+      <Content>
+        <Description>
           <p>Fala Galera</p>
 
           <p>O caminho é longo e a derrota é certa!</p>
-        </Content>
+        </Description>
 
         <Hastags>
           <span>#collabspace</span>
           <span>#confia</span>
         </Hastags>
-      </main>
+      </Content>
 
       <Divider />
 
-      <footer>
+      <CommentForm>
         <h1>Deixe seu comentário</h1>
 
         <textarea name=""></textarea>
 
         <button>Comentar</button>
-      </footer>
+      </CommentForm>
+
+      <Divider />
+
+      <Comments>
+        <Comment />
+      </Comments>
     </Container>
   );
 };
