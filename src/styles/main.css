@@ -9,6 +9,7 @@
   --zinc-500: #71717a;
   --zinc-700: #3f3f46;
   --zinc-800: #27272a;
+  --zinc-600: #52525b;
 
   --emerald-500: #10b981;
   --emerald-600: #059669;
@@ -26,4 +27,20 @@
 body, input, textarea, button {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--zinc-800);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--zinc-600);
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
 }

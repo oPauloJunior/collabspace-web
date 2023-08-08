@@ -12,4 +12,8 @@ export const Container = styled.header`
   h1 {
     color: var(--white);
   }
+
+  img {
+    width: 3.5rem;
+  }
 `;
