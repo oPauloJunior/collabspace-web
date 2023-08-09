@@ -40,20 +40,23 @@ export const AuthorAndTime = styled.div`
   }
 
   button {
-    position: absolute;
-    top: 0;
-    right: 0;
+  }
+`;
 
-    border: 0;
-    outline: 0;
-    color: var(--zinc-500);
-    background: transparent;
-    transition: all 0.15s;
+export const ButtonDelete = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
 
-    cursor: pointer;
+  border: 0;
+  outline: 0;
+  color: var(--zinc-500);
+  background: transparent;
+  transition: all 0.15s;
 
-    &:hover {
-      color: var(--red-500);
-    }
+  cursor: pointer;
+
+  &:hover {
+    color: var(--red-500);
   }
 `;

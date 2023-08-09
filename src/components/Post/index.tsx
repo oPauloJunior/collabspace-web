@@ -11,6 +11,8 @@ import {
   Author,
   Description,
   CommentForm,
+  ButtonComment,
+  InputArea,
 } from "./styles";
 
 const Post: React.FC = () => {
@@ -18,7 +20,10 @@ const Post: React.FC = () => {
     <Container>
       <Header>
         <Author>
-          <Avatar />
+          <Avatar
+            src="https://qph.cf2.quoracdn.net/main-qimg-7395016f35224a70dd1b510afe6e5d71-pjlq"
+            borderEffect
+          />
 
           <AuthorInfo>
             <h1>Paulo Junior</h1>
@@ -47,9 +52,9 @@ const Post: React.FC = () => {
       <CommentForm>
         <h1>Deixe seu comentário</h1>
 
-        <textarea name=""></textarea>
+        <InputArea name=""></InputArea>
 
-        <button>Comentar</button>
+        <ButtonComment>Comentar</ButtonComment>
       </CommentForm>
 
       <Divider />
