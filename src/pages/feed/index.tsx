@@ -2,6 +2,7 @@ import Header from "../../components/Header";
 import ProfileCard from "../../components/ProfileCard";
 import { Container, Content, Posts } from "./styles";
 import Post from "../../components/Post";
+import CreatePost from "../../components/CreatePost";
 
 const Feed: React.FC = () => {
   return (
@@ -12,6 +13,15 @@ const Feed: React.FC = () => {
         <ProfileCard />
 
         <Posts>
+          <CreatePost />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
           <Post />
         </Posts>
       </Content>
