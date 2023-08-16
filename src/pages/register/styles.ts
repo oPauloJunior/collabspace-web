@@ -1,4 +1,12 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
+
+interface AreaEmailProps {
+  $areaEmail: boolean;
+}
+
+interface AreaPasswordProps {
+  $areaPassword: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -14,14 +22,23 @@ export const Form = styled.form`
   display: flex;
   padding: 0 1rem;
   flex-direction: column;
-  width: 320px;
-  margin: 2.5rem 0;
+  min-width: 320px;
+  margin: 2rem 0;
 
   h1 {
     color: var(--zinc-100);
     font-weight: 600;
     font-size: 3rem;
     margin-bottom: 2.5rem;
+  }
+
+  input[type="date"] {
+    color: var(-zinc-300);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(66.66%);
   }
 `;
 
@@ -40,7 +57,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   height: 48px;
   background-color: var(--zinc-800);
-  color: var(--zinc-100);
+  color: var(--zinc-300);
   font-size: 1rem;
   padding: 1.25rem 1rem;
   border-radius: 4px;
@@ -50,6 +67,30 @@ export const Input = styled.input`
   ::placeholder {
     color: var(--zinc-500);
   }
+`;
+
+export const AreaEmail = styled(Group)<AreaEmailProps>`
+  max-height: 150px;
+  transition: 0.3s ease;
+  overflow: hidden;
+
+  ${({ $areaEmail }) =>
+    $areaEmail &&
+    css`
+      max-height: 0;
+    `}
+`;
+
+export const AreaPassword = styled(Group)<AreaPasswordProps>`
+  max-height: 150px;
+  transition: 0.3s ease;
+  overflow: hidden;
+
+  ${({ $areaPassword }) =>
+    $areaPassword &&
+    css`
+      max-height: 0;
+    `}
 `;
 
 export const Button = styled.button`
@@ -68,5 +109,10 @@ export const Button = styled.button`
 
   &:hover {
     background: var(--emerald-800);
+  }
+
+  &:disabled {
+    background: var(--zinc-600);
+    cursor: not-allowed;
   }
 `;

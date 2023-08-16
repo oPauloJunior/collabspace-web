@@ -1,7 +1,7 @@
 import { styled, css } from "styled-components";
 
 interface CommnetAreaProps {
-  commentArea: boolean;
+  $commentArea: boolean;
 }
 
 export const Container = styled.div`
@@ -159,8 +159,8 @@ export const CommentArea = styled.div<CommnetAreaProps>`
   margin-top: 2rem;
   transition: all 0.25s;
 
-  ${({ commentArea }) =>
-    !commentArea &&
+  ${({ $commentArea }) =>
+    !$commentArea &&
     css`
       display: none;
     `}
