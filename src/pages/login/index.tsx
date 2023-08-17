@@ -8,12 +8,12 @@ const Login: React.FC = () => {
 
         <Group>
           <Label htmlFor="">Endereço de email</Label>
-          <Input type="text" placeholder="Digite seu email" />
+          <Input type="text" required placeholder="Digite seu email" />
         </Group>
 
         <Group>
           <Label htmlFor="">Senha secreta</Label>
-          <Input type="text" placeholder="Digite sua senha" />
+          <Input type="password" required placeholder="Digite sua senha" />
         </Group>
 
         <Button>Fazer login</Button>
