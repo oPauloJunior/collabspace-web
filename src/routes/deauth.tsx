@@ -1,6 +1,6 @@
-import Login from "../pages/login";
+import Login from "../pages/Login";
 import { Route, Routes } from "react-router-dom";
-import Register from "../pages/register";
+import Register from "../pages/Register";
 
 function DeauthRoutes() {
   return (

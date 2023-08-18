@@ -1,4 +1,4 @@
-import Feed from "../pages/feed";
+import Feed from "../pages/Feed";
 import { Route, Routes } from "react-router-dom";
 
 function AuthRoutes() {

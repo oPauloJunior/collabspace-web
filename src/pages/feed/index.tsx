@@ -1,31 +1,27 @@
-import Header from "../../components/Header";
+import LayoutDefault from "../../layouts/default";
 import ProfileCard from "../../components/ProfileCard";
-import { Container, Content, Posts } from "./styles";
+import { Posts } from "./styles";
 import Post from "../../components/Post";
 import CreatePost from "../../components/CreatePost";
 
 const Feed: React.FC = () => {
   return (
-    <Container>
-      <Header />
+    <LayoutDefault>
+      <ProfileCard />
 
-      <Content>
-        <ProfileCard />
-
-        <Posts>
-          <CreatePost />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-        </Posts>
-      </Content>
-    </Container>
+      <Posts>
+        <CreatePost />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+      </Posts>
+    </LayoutDefault>
   );
 };
 
