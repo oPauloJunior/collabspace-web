@@ -32,7 +32,6 @@ export const Info = styled.div`
     font-size: 0.875rem;
     font-weight: 200;
     color: var(--zinc-200);
-    overflow: hidden;
   }
 `;
 
