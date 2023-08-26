@@ -10,5 +10,9 @@ export const Container = styled.header`
   justify-content: center;
 
   position: fixed;
-  z-index: 9999;
+  z-index: 999;
+
+  svg {
+    cursor: pointer;
+  }
 `;

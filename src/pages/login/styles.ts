@@ -1,26 +1,26 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--zinc-900);
+
   display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 100vw;
-  min-height: 100vh;
-  background-color: var(--zinc-900);
 `;
 
 export const Form = styled.form`
-  display: flex;
-  padding: 0 1rem;
-  flex-direction: column;
   width: 320px;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
   margin: 2.5rem 0;
 
   h1 {
     color: var(--zinc-100);
-    font-weight: 600;
     font-size: 3rem;
+    font-weight: 600;
     margin-bottom: 2.5rem;
   }
 `;
@@ -39,8 +39,8 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   height: 48px;
-  background-color: var(--zinc-800);
-  color: var(--zinc-100);
+  background: var(--zinc-800);
+  color: var(--zinc-300);
   font-size: 1rem;
   padding: 1.25rem 1rem;
   border-radius: 4px;
@@ -48,13 +48,13 @@ export const Input = styled.input`
   outline: 0;
 
   ::placeholder {
-    color: var(--zinc-500);
+    color: ar(--zinc-500);
   }
 `;
 
 export const Button = styled.button`
   height: 48px;
-  background-color: var(--emerald-600);
+  background: var(--emerald-600);
   color: var(--zinc-100);
   font-size: 1.125rem;
   font-weight: bold;

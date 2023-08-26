@@ -1,6 +1,7 @@
-import Avatar from "../Avatar";
+import Avatar from "../AvatarSquare";
 import InputArea from "../InputArea";
-import Button from "../button";
+import Button from "../Button";
+
 import { Container, Content } from "./styles";
 
 const CreatePost: React.FC = () => {
@@ -8,11 +9,11 @@ const CreatePost: React.FC = () => {
     <Container>
       <Content>
         <Avatar
-          src="https://qph.cf2.quoracdn.net/main-qimg-7395016f35224a70dd1b510afe6e5d71-pjlq"
+          src="https://i.pinimg.com/736x/b7/65/02/b76502e936cd209b595bd7a537e74db4.jpg"
           borderEffect
         />
 
-        <InputArea placeholder="O que temos para hoje?" rows={2} />
+        <InputArea rows={2} placeholder="O que temos para hoje?" />
       </Content>
 
       <Button>Publicar</Button>

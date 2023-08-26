@@ -3,24 +3,25 @@ import { styled } from "styled-components";
 export const Container = styled.aside`
   width: 25%;
   height: 350px;
-  background-color: var(--zinc-800);
-
+  background: var(--zinc-800);
   border-radius: 8px;
 `;
 
-export const Header = styled.header`
+export const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   div {
     margin-top: -28px;
+
+    cursor: pointer;
   }
 `;
 
 export const Cover = styled.img`
-  height: 6rem;
   width: 100%;
+  height: 6rem;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
 `;
@@ -37,6 +38,12 @@ export const Content = styled.div`
     font-size: 1rem;
     color: var(--zinc-200);
     font-weight: bold;
+
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   p {

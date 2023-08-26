@@ -1,16 +1,17 @@
 import { Trash } from "phosphor-react";
 
-import Avatar from "../Avatar";
-import { AuthorAndTime, ButtonDelete, CommentBox, Container } from "./styles";
+import Avatar from "../AvatarSquare";
+
+import { Container, CommentBox, AuthorAndTime, ButtonDelete } from "./styles";
 
 const Comment: React.FC = () => {
   return (
     <Container>
-      <Avatar src="https://i1.sndcdn.com/artworks-o0m6E25xFEkcNEA6-fNMSxg-t500x500.jpg" />
+      <Avatar src="https://media.fstatic.com/DH5yngg4vQQdK9csLNLAzsPJ9N8=/full-fit-in/290x478/filters:format(webp)/media/artists/avatar/2022/12/naldo-benny_a305866.jpg" />
 
       <CommentBox>
         <AuthorAndTime>
-          <h1>James Salada de Frutas</h1>
+          <h1>Naldo Beny</h1>
           <time>Cerca de 2h</time>
 
           <ButtonDelete>
@@ -18,7 +19,10 @@ const Comment: React.FC = () => {
           </ButtonDelete>
         </AuthorAndTime>
 
-        <p>Olha que habilidade</p>
+        <p>
+          Ai Ney, ta ligado que o LeBroun ficou impressionado com a cor do meu
+          tênis la em Miami 😎
+        </p>
       </CommentBox>
     </Container>
   );

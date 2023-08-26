@@ -1,4 +1,4 @@
-import { css, styled } from "styled-components";
+import { styled, css } from "styled-components";
 
 interface AreaEmailProps {
   $areaEmail: boolean;
@@ -13,35 +13,34 @@ interface PasswordMeterProps {
 }
 
 export const Container = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--zinc-900);
+
   display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 100vw;
-  min-height: 100vh;
-  background-color: var(--zinc-900);
 `;
 
 export const Form = styled.form`
-  display: flex;
-  padding: 0 1rem;
-  flex-direction: column;
   min-width: 320px;
-  margin: 2rem 0;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 0;
 
   h1 {
     color: var(--zinc-100);
-    font-weight: 600;
     font-size: 3rem;
-    margin-bottom: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
   }
 
   input[type="date"] {
-    color: var(-zinc-300);
+    color: var(--zinc-300);
   }
 
   input[type="date"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
     filter: invert(66.66%);
   }
 `;
@@ -70,7 +69,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   height: 48px;
-  background-color: var(--zinc-800);
+  background: var(--zinc-800);
   color: var(--zinc-300);
   font-size: 1rem;
   padding: 1.25rem 1rem;
@@ -79,7 +78,7 @@ export const Input = styled.input`
   outline: 0;
 
   ::placeholder {
-    color: var(--zinc-500);
+    color: ar(--zinc-500);
   }
 `;
 
@@ -104,20 +103,20 @@ export const AreaPassword = styled(Group)<AreaPasswordProps>`
     $areaPassword &&
     css`
       max-height: 0;
-    `}
+    `};
 `;
 
 export const PasswordMeter = styled.div<PasswordMeterProps>`
   height: 2px;
   border-radius: 9999px;
-  text-align: ${({ $isWeak }) => ($isWeak ? "left" : "right")};
   font-size: 0.75rem;
-  font-weight: 300;
+  text-align: ${({ $isWeak }) => ($isWeak ? "left" : "right")};
   margin-bottom: 0.5rem;
+
   background: var(--zinc-300);
 
   &::after {
-    content: "Senha Fraca";
+    content: "Senha fraca";
     display: block;
     padding-top: 2px;
     color: var(--zinc-300);
@@ -129,7 +128,7 @@ export const PasswordMeter = styled.div<PasswordMeterProps>`
       background: var(--emerald-600);
 
       &::after {
-        content: "Senha Forte";
+        content: "Senha forte";
         display: block;
         padding-top: 2px;
         color: var(--emerald-600);
@@ -139,7 +138,7 @@ export const PasswordMeter = styled.div<PasswordMeterProps>`
 
 export const Button = styled.button`
   height: 48px;
-  background-color: var(--emerald-600);
+  background: var(--emerald-600);
   color: var(--zinc-100);
   font-size: 1.125rem;
   font-weight: bold;

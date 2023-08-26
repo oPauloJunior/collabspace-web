@@ -1,27 +1,28 @@
 import { ThumbsUp, ChatCircleText } from "phosphor-react";
 
-import Avatar from "../Avatar";
+import AvatarSquare from "../AvatarSquare";
 import Comment from "../Comment";
 import InputArea from "../InputArea";
-import Button from "../button";
+import Button from "../Button";
+
 import {
   Container,
-  Content,
-  Hastags,
-  Divider,
-  Comments,
   Header,
-  AuthorInfo,
   Author,
+  AuthorInfo,
+  Content,
   Description,
-  CommentForm,
+  Hashtags,
+  Divider,
   Interactions,
+  InteractionInfo,
   CountReaction,
   CountComment,
-  InteractionInfo,
   InteractionAction,
   ButtonAction,
   CommentArea,
+  CommentForm,
+  Comments,
 } from "./styles";
 import { useState } from "react";
 
@@ -36,14 +37,14 @@ const Post: React.FC = () => {
     <Container>
       <Header>
         <Author>
-          <Avatar
-            src="https://qph.cf2.quoracdn.net/main-qimg-7395016f35224a70dd1b510afe6e5d71-pjlq"
+          <AvatarSquare
+            src="https://b.fssta.com/uploads/application/soccer/headshots/713.png"
             borderEffect
           />
 
           <AuthorInfo>
-            <h1>Paulo Junior</h1>
-            <p>paulojunior2009@outlook.com</p>
+            <h1>Neymar Jr</h1>
+            <p>ney@hotney.com</p>
           </AuthorInfo>
         </Author>
 
@@ -52,15 +53,18 @@ const Post: React.FC = () => {
 
       <Content>
         <Description>
-          <p>Fala Galera</p>
-
-          <p>O caminho é longo e a derrota é certa!</p>
+          <p>Fala galeraa 👋</p>
+          <p>
+            Você pode sempre sonhar, e seus sonhos se tornarão sonhos, e a
+            realidade se tornará realidade. Mas é você que tem que torná-los
+            realidade. 🚀
+          </p>
         </Description>
 
-        <Hastags>
+        <Hashtags>
           <span>#collabspace</span>
           <span>#confia</span>
-        </Hastags>
+        </Hashtags>
       </Content>
 
       <Interactions>
@@ -73,7 +77,7 @@ const Post: React.FC = () => {
           </CountReaction>
 
           <CountComment>
-            <span onClick={toggleCommentArea}>7 Comentários</span>
+            <span onClick={toggleCommentArea}>7 comentários</span>
           </CountComment>
         </InteractionInfo>
 
@@ -82,6 +86,7 @@ const Post: React.FC = () => {
             <ThumbsUp size={22} />
             Reagir
           </ButtonAction>
+
           <ButtonAction onClick={toggleCommentArea}>
             <ChatCircleText size={22} />
             Comentar
@@ -93,10 +98,7 @@ const Post: React.FC = () => {
         <CommentForm>
           <h1>Deixe seu comentário</h1>
 
-          <InputArea
-            placeholder="Escreva seu comentário..."
-            rows={3}
-          ></InputArea>
+          <InputArea rows={3} placeholder="Escreva seu comentário aqui ..." />
 
           <Button>Comentar</Button>
         </CommentForm>

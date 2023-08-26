@@ -1,5 +1,6 @@
-import Login from "../pages/Login";
 import { Route, Routes } from "react-router-dom";
+
+import Login from "../pages/Login";
 import Register from "../pages/Register";
 
 function DeauthRoutes() {
@@ -7,7 +8,8 @@ function DeauthRoutes() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="*" element={<h1>Not Found!</h1>} />
+
+      <Route path="*" element={<h1>Not found!</h1>} />
     </Routes>
   );
 }

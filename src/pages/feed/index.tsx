@@ -1,8 +1,10 @@
-import LayoutDefault from "../../layouts/default";
+import LayoutDefault from "../../layouts/Default";
+
 import ProfileCard from "../../components/ProfileCard";
-import { Container, Posts } from "./styles";
-import Post from "../../components/Post";
 import CreatePost from "../../components/CreatePost";
+import Post from "../../components/Post";
+
+import { Container, Posts } from "./styles";
 
 const Feed: React.FC = () => {
   return (
@@ -12,10 +14,7 @@ const Feed: React.FC = () => {
 
         <Posts>
           <CreatePost />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+
           <Post />
           <Post />
           <Post />

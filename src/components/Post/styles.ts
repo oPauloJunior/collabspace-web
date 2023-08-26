@@ -1,13 +1,13 @@
 import { styled, css } from "styled-components";
 
-interface CommnetAreaProps {
+interface CommentAreaProps {
   $commentArea: boolean;
 }
 
 export const Container = styled.div`
   width: 100%;
+  padding: 40px;
   background: var(--zinc-800);
-  padding: 2.5rem;
   border-radius: 8px;
 `;
 
@@ -27,7 +27,7 @@ export const Author = styled.div`
   gap: 1rem;
 `;
 
-export const AuthorInfo = styled.div`
+export const AuthorInfo = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,7 +58,7 @@ export const Description = styled.div`
   }
 `;
 
-export const Hastags = styled.div`
+export const Hashtags = styled.div`
   display: flex;
   gap: 0.5rem;
   margin-top: 1rem;
@@ -87,6 +87,7 @@ export const Interactions = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
   margin-top: 2rem;
 `;
 
@@ -95,8 +96,8 @@ export const InteractionInfo = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
-  border-bottom: 1px solid var(--zinc-700);
   border-top: 1px solid var(--zinc-700);
+  border-bottom: 1px solid var(--zinc-700);
 
   span {
     font-size: 0.875rem;
@@ -113,7 +114,7 @@ export const InteractionInfo = styled.div`
 export const CountReaction = styled.div`
   span {
     display: flex;
-    gap: 5px;
+    gap: 4px;
   }
 
   svg {
@@ -126,17 +127,15 @@ export const CountComment = styled.div``;
 export const InteractionAction = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   justify-content: space-around;
   gap: 2rem;
 `;
 
 export const ButtonAction = styled.button`
+  width: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25%;
-  font-size: 0.875rem;
   gap: 4px;
   background: transparent;
   border: 0;
@@ -155,9 +154,8 @@ export const ButtonAction = styled.button`
   }
 `;
 
-export const CommentArea = styled.div<CommnetAreaProps>`
+export const CommentArea = styled.div<CommentAreaProps>`
   margin-top: 2rem;
-  transition: all 0.25s;
 
   ${({ $commentArea }) =>
     !$commentArea &&

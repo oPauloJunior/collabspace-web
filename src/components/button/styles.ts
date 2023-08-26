@@ -2,14 +2,14 @@ import { styled } from "styled-components";
 
 export const Container = styled.button`
   width: 150px;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.5rem;
   background: var(--emerald-600);
-  font-weight: bold;
+  color: var(--zinc-200);
   font-size: 1rem;
-  border-radius: 8px;
+  font-weight: bold;
   border: 1px solid var(--emerald-600);
   outline: 0;
-  color: var(--zinc-200);
+  border-radius: 8px;
   transition: all 0.25s;
 
   cursor: pointer;

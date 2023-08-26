@@ -1,21 +1,23 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Container,
   Form,
+  ErrorAlert,
   Group,
   Label,
   Input,
   AreaEmail,
   AreaPassword,
-  Button,
-  ErrorAlert,
   PasswordMeter,
+  Button,
   LinkLogin,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [email, setEmail] = useState("");
@@ -34,20 +36,18 @@ const Register: React.FC = () => {
     /(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
   );
 
-  const navigate = useNavigate();
-
   const handleLogin = () => {
     navigate("/");
   };
 
   return (
     <Container>
-      <Form>
+      <Form autoComplete="on">
         <h1>Cadastre-se</h1>
 
         {email && !isEmail && <ErrorAlert>O e-mail não é válido!</ErrorAlert>}
         {confirmEmail && !isTheSameEmails && (
-          <ErrorAlert>E-mails não coincidem!</ErrorAlert>
+          <ErrorAlert>Os e-mails não coincidem!</ErrorAlert>
         )}
         {confirmPassword && !isTheSamePasswords && (
           <ErrorAlert>As senhas não coincidem!</ErrorAlert>
@@ -130,6 +130,7 @@ const Register: React.FC = () => {
           />
 
           {password && <PasswordMeter $isWeak={!isPasswordStrong} />}
+
           <Input
             type="password"
             id="confirmPassword"
@@ -159,7 +160,7 @@ const Register: React.FC = () => {
         </Button>
 
         <LinkLogin>
-          <p>Já tem conta?</p>
+          <p>Já sou cadastrado?</p>
           <a onClick={handleLogin}>Entrar agora</a>
         </LinkLogin>
       </Form>

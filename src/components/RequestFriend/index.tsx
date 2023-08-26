@@ -1,30 +1,32 @@
 import { Check, X } from "phosphor-react";
 
+import AvatarCircle from "../AvatarCircle";
+
 import {
-  Actions,
-  Avatar,
-  ButtonAcept,
-  ButtonRecuse,
   Container,
-  Info,
   User,
+  Info,
+  Actions,
+  ButtonAccept,
+  ButtonRecuse,
 } from "./styles";
 
 const RequestFriend: React.FC = () => {
   return (
     <Container>
       <User>
-        <Avatar src="https://i.pinimg.com/736x/8f/40/84/8f40845375d4ea238bd8172b377a6c86.jpg" />
+        <AvatarCircle src="https://images.generated.photos/rRsRe7d3ekuoklEhgFeJ0mlCEMsuw7je_Wzzmlo_9UM/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MjUzMzMyLmpwZw.jpg" />
+
         <Info>
-          <h1>Genos Ciborg</h1>
-          <p>genosgostozao@outlook.netfdsfdsddddddd</p>
+          <h1>Marta Ribeiro</h1>
+          <p>martaribeiro@hotmaadsasdasdasdil.com</p>
         </Info>
       </User>
 
       <Actions>
-        <ButtonAcept>
+        <ButtonAccept>
           <Check size={18} />
-        </ButtonAcept>
+        </ButtonAccept>
 
         <ButtonRecuse>
           <X size={18} />

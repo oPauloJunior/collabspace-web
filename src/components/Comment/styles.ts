@@ -18,11 +18,6 @@ export const CommentBox = styled.div`
   }
 `;
 
-export const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 export const AuthorAndTime = styled.div`
   position: relative;
 
@@ -37,9 +32,6 @@ export const AuthorAndTime = styled.div`
   time {
     font-size: 0.75rem;
     color: var(--zinc-500);
-  }
-
-  button {
   }
 `;
 
