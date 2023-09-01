@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthentication } from "../../contexts/Authentication";
 
+import { Spiner } from "../../assets/sources";
+
 import {
   Container,
   Form,
@@ -28,6 +30,7 @@ const Register: React.FC = () => {
   const [confirmEmail, setConfirmEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loanding, setLoading] = useState<boolean>(false);
 
   const areaEmail = !name || !birthDate;
   const areaPassword = !email || !confirmEmail || areaEmail;
@@ -48,6 +51,8 @@ const Register: React.FC = () => {
     async (e: FormEvent) => {
       e.preventDefault();
 
+      setLoading(true);
+
       try {
         const { result, message, data } = await createUser({
           name,
@@ -58,8 +63,6 @@ const Register: React.FC = () => {
           birthDate,
         });
 
-        console.log(data);
-
         if (result === "success") {
           if (data) {
             toast.success(message);
@@ -69,10 +72,13 @@ const Register: React.FC = () => {
           }
         }
 
-        if (result === "error") {
-          toast.error(message);
-        }
-      } catch (error) {}
+        if (result === "error") toast.error(message);
+
+        setLoading(false);
+      } catch (error: any) {
+        toast.error(error.messsage);
+        setLoading(false);
+      }
     },
     [
       birthDate,
@@ -202,7 +208,7 @@ const Register: React.FC = () => {
             !isPasswordStrong
           }
         >
-          Cadastrar
+          {loanding ? <Spiner /> : "Cadastrar"}
         </Button>
 
         <LinkLogin>

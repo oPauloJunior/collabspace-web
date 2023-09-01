@@ -1,5 +1,15 @@
 import { AppResponse } from "../../Api/types";
 
+interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  telephone: string;
+  birthDate: string | null;
+  avatarUrl: string | null;
+  createdAt: string;
+}
+
 interface ICreateUserRequest {
   name: string;
   email: string;
@@ -20,4 +30,20 @@ interface ICreateUserResponse extends AppResponse {
   };
 }
 
-export type { ICreateUserRequest, ICreateUserResponse };
+interface IListUsersByIdRequest {
+  id: string;
+}
+
+interface IListUsersByIdResponse extends AppResponse {
+  data?: {
+    user: IUser;
+  };
+}
+
+export type {
+  IUser,
+  ICreateUserRequest,
+  ICreateUserResponse,
+  IListUsersByIdRequest,
+  IListUsersByIdResponse,
+};

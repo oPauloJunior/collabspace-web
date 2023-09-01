@@ -137,6 +137,10 @@ export const PasswordMeter = styled.div<PasswordMeterProps>`
 `;
 
 export const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   height: 48px;
   background: var(--emerald-600);
   color: var(--zinc-100);

@@ -1,6 +1,11 @@
 import api from "../Api/api";
 
-import { ICreateUserRequest, ICreateUserResponse } from "./types";
+import {
+  ICreateUserRequest,
+  ICreateUserResponse,
+  IListUsersByIdRequest,
+  IListUsersByIdResponse,
+} from "./types";
 
 const createUser = async ({
   name,
@@ -27,4 +32,15 @@ const createUser = async ({
   return response.data;
 };
 
-export { createUser };
+const listUserById = async ({
+  id,
+}: IListUsersByIdRequest): Promise<IListUsersByIdResponse> => {
+  const response = await api
+    .get(`/users/${id}`)
+    .then((res) => res)
+    .catch((err) => err);
+
+  return response.data;
+};
+
+export { createUser, listUserById };
