@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, FormEvent } from "react";
 
 import LayoutDefault from "../../layouts/Default";
 
@@ -8,6 +8,14 @@ import RequestFriend from "../../components/RequestFriend";
 import FriendCard from "../../components/FriendCard";
 
 import { Camera, PencilSimple, MapPin, Phone, Clock } from "phosphor-react";
+
+import { listUserById, updateAvatar, updateCover } from "../../services/users";
+import { IUser } from "../../services/users/types";
+import { toast } from "react-toastify";
+import moment from "moment";
+import { useAuthentication } from "../../contexts/Authentication";
+
+import Modal from "../../components/Modal";
 
 import {
   Container,
@@ -27,13 +35,10 @@ import {
   Sidebar,
   Requests,
   RequestList,
+  FormEdit,
+  InputEdit,
+  ButtonEdit,
 } from "./styles";
-
-import { listUserById } from "../../services/users";
-import { IUser } from "../../services/users/types";
-import { toast } from "react-toastify";
-import moment from "moment";
-import { useAuthentication } from "../../contexts/Authentication";
 
 moment.defineLocale("pt-br", {
   weekdays: "Segunda_Terça_Quarta_Quinta_Sexta_Sabado_Domingo".split("_"),
@@ -45,9 +50,14 @@ moment.defineLocale("pt-br", {
 
 const Profile: React.FC = () => {
   const { id } = useParams();
-  const { signOut } = useAuthentication();
+  const { signOut, handleAvatarUrl, handleCoverUrl } = useAuthentication();
 
   const [user, setUser] = useState<IUser | null>(null);
+
+  const [modalEditAvatar, setModalEditAvatar] = useState(false);
+  const [modalEditCover, setModalEditCover] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [coverUrl, setCoverUrl] = useState("");
 
   const handleListUserById = useCallback(async () => {
     try {
@@ -65,6 +75,54 @@ const Profile: React.FC = () => {
     }
   }, [id]);
 
+  const handleUpdateAvatar = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      try {
+        const { result, message } = await updateAvatar({ avatarUrl });
+
+        if (result === "success") {
+          handleAvatarUrl(avatarUrl);
+          toast.success(message);
+          setModalEditAvatar(!modalEditAvatar);
+        }
+
+        if (result === "error") toast.error(message);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    },
+    [avatarUrl, handleAvatarUrl, modalEditAvatar],
+  );
+
+  const handleUpdateCover = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      try {
+        const { result, message } = await updateCover({ coverUrl });
+
+        if (result === "success") {
+          handleCoverUrl(coverUrl);
+          toast.success(message);
+          setModalEditCover(!modalEditCover);
+        }
+
+        if (result === "error") toast.error(message);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    },
+    [coverUrl, handleCoverUrl, modalEditCover],
+  );
+
+  function toggleModalEditAvatar() {
+    setModalEditAvatar(!modalEditAvatar);
+  }
+
+  function toggleModalEditCover() {
+    setModalEditCover(!modalEditCover);
+  }
+
   useEffect(() => {
     handleListUserById();
   }, [id, handleListUserById]);
@@ -76,15 +134,26 @@ const Profile: React.FC = () => {
           <Overview>
             <UserBanner>
               <EditCoverButton>
-                <Camera size={22} weight="fill" />
+                <Camera
+                  onClick={toggleModalEditCover}
+                  size={22}
+                  weight="fill"
+                />
               </EditCoverButton>
 
-              <Cover src={"https://i.imgur.com/gH2QLjf.png"} />
+              <Cover
+                src={
+                  coverUrl ||
+                  user?.coverUrl ||
+                  "https://i.imgur.com/gH2QLjf.png"
+                }
+              />
 
               <div>
                 <AvatarCircle
                   size="192px"
-                  src={user?.avatarUrl || "https://i.imgur.com/HYrZqHy.jpg"}
+                  avatar={avatarUrl || user?.avatarUrl}
+                  onClick={toggleModalEditAvatar}
                 />
               </div>
 
@@ -173,6 +242,48 @@ const Profile: React.FC = () => {
           </a>
         </Sidebar>
       </Container>
+
+      <Modal
+        width="75%"
+        height="120px"
+        isOpen={modalEditAvatar}
+        onClose={toggleModalEditAvatar}
+      >
+        <FormEdit onSubmit={handleUpdateAvatar}>
+          <InputEdit
+            name="ava"
+            value={avatarUrl}
+            type="text"
+            placeholder="URL da imagem"
+            onChange={(e) => {
+              setAvatarUrl(e.target.value);
+            }}
+            required
+          />
+          <ButtonEdit>Salvar</ButtonEdit>
+        </FormEdit>
+      </Modal>
+
+      <Modal
+        width="75%"
+        height="120px"
+        isOpen={modalEditCover}
+        onClose={toggleModalEditCover}
+      >
+        <FormEdit onSubmit={handleUpdateCover}>
+          <InputEdit
+            name="avatarUrl"
+            value={coverUrl}
+            type="text"
+            placeholder="URL do cover"
+            onChange={(e) => {
+              setCoverUrl(e.target.value);
+            }}
+            required
+          />
+          <ButtonEdit>Salvar</ButtonEdit>
+        </FormEdit>
+      </Modal>
     </LayoutDefault>
   );
 };

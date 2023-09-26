@@ -6,6 +6,8 @@ import {
   ReactNode,
 } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { User } from "../services/Sessions/types";
 
 import { session } from "../services/Sessions";
@@ -31,7 +33,10 @@ interface AuthenticationContextType {
   loggedEmail: string;
   handleLoggedEmail: (email: string) => void;
   signIn(data: SignInRequest): Promise<SignInResponse>;
+  handleAvatarUrl: (avatarUrl: string) => void;
+  handleCoverUrl: (coverUrl: string) => void;
   signOut(): void;
+  me(id?: string): void;
 }
 
 interface AuthenticationProviderProps {
@@ -43,6 +48,8 @@ const AuthenticationContext = createContext<AuthenticationContextType>(
 );
 
 const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
+  const navigate = useNavigate();
+
   const [user, setUser] = usePersistedState<Partial<User> | null>("user", null);
   const [token, setToken] = usePersistedState<string>("token", "");
 
@@ -54,6 +61,26 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
       setLoggedEmail(email);
     },
     [setLoggedEmail],
+  );
+
+  const handleAvatarUrl = useCallback(
+    (avatarUrl: string) => {
+      setUser((prevState) => ({
+        ...prevState,
+        avatarUrl,
+      }));
+    },
+    [setUser],
+  );
+
+  const handleCoverUrl = useCallback(
+    (coverUrl: string) => {
+      setUser((prevState) => ({
+        ...prevState,
+        coverUrl,
+      }));
+    },
+    [setUser],
   );
 
   const signIn = useCallback(
@@ -88,6 +115,10 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
     setToken("");
   };
 
+  const me = (id: string) => {
+    if (id) navigate(`/me/${id}`);
+  };
+
   return (
     <AuthenticationContext.Provider
       value={{
@@ -98,7 +129,10 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
         loggedEmail,
         handleLoggedEmail,
         signIn,
+        handleAvatarUrl,
+        handleCoverUrl,
         signOut,
+        me,
       }}
     >
       {children}
