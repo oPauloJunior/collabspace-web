@@ -38,6 +38,7 @@ import {
   FormEdit,
   InputEdit,
   ButtonEdit,
+  PreviewAvatar,
 } from "./styles";
 
 moment.defineLocale("pt-br", {
@@ -50,12 +51,18 @@ moment.defineLocale("pt-br", {
 
 const Profile: React.FC = () => {
   const { id } = useParams();
-  const { signOut, handleAvatarUrl, handleCoverUrl } = useAuthentication();
+  const {
+    user: userLogged,
+    signOut,
+    handleAvatarUrl,
+    handleCoverUrl,
+  } = useAuthentication();
 
   const [user, setUser] = useState<IUser | null>(null);
 
   const [modalEditAvatar, setModalEditAvatar] = useState(false);
   const [modalEditCover, setModalEditCover] = useState(false);
+  const [modalPreviewAvatar, setModalPreviewAvatar] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
   const [coverUrl, setCoverUrl] = useState("");
 
@@ -123,9 +130,16 @@ const Profile: React.FC = () => {
     setModalEditCover(!modalEditCover);
   }
 
+  function toggleModalPreviewAvatar() {
+    if (user?.avatarUrl) setModalPreviewAvatar(!modalPreviewAvatar);
+    else setModalPreviewAvatar(false);
+  }
+
   useEffect(() => {
     handleListUserById();
   }, [id, handleListUserById]);
+
+  const isOwner = id === userLogged?.id;
 
   return (
     <LayoutDefault>
@@ -133,13 +147,11 @@ const Profile: React.FC = () => {
         <Content>
           <Overview>
             <UserBanner>
-              <EditCoverButton>
-                <Camera
-                  onClick={toggleModalEditCover}
-                  size={22}
-                  weight="fill"
-                />
-              </EditCoverButton>
+              {isOwner && (
+                <EditCoverButton onClick={toggleModalEditCover}>
+                  <Camera size={22} weight="fill" />
+                </EditCoverButton>
+              )}
 
               <Cover
                 src={
@@ -153,22 +165,23 @@ const Profile: React.FC = () => {
                 <AvatarCircle
                   size="192px"
                   avatar={avatarUrl || user?.avatarUrl}
-                  onClick={toggleModalEditAvatar}
+                  onClick={
+                    isOwner ? toggleModalEditAvatar : toggleModalPreviewAvatar
+                  }
                 />
               </div>
 
-              <EditInfoButton>
-                <PencilSimple size={22} weight="bold" />
-              </EditInfoButton>
+              {isOwner && (
+                <EditInfoButton>
+                  <PencilSimple size={22} weight="bold" />
+                </EditInfoButton>
+              )}
             </UserBanner>
 
             <UserInfo>
               <General>
                 <h1>{user?.name}</h1>
-                <p>
-                  Você só vai me olhar, me julgar, tirar conclusões
-                  precipitadas, mas ainda… assim não vai me conhecer.
-                </p>
+                <p>{user?.bio}</p>
 
                 <Total>
                   <span>
@@ -241,49 +254,57 @@ const Profile: React.FC = () => {
             Sair
           </a>
         </Sidebar>
+        <Modal
+          width="75%"
+          height="120px"
+          isOpen={modalEditAvatar}
+          onClose={toggleModalEditAvatar}
+        >
+          <FormEdit onSubmit={handleUpdateAvatar}>
+            <InputEdit
+              name="ava"
+              value={avatarUrl}
+              type="text"
+              placeholder="URL da imagem"
+              onChange={(e) => {
+                setAvatarUrl(e.target.value);
+              }}
+            />
+            <ButtonEdit>Salvar</ButtonEdit>
+          </FormEdit>
+        </Modal>
+
+        <Modal
+          width="75%"
+          height="120px"
+          isOpen={modalEditCover}
+          onClose={toggleModalEditCover}
+        >
+          <FormEdit onSubmit={handleUpdateCover}>
+            <InputEdit
+              name="avatarUrl"
+              value={coverUrl}
+              type="text"
+              placeholder="URL do cover"
+              onChange={(e) => {
+                setCoverUrl(e.target.value);
+              }}
+            />
+            <ButtonEdit>Salvar</ButtonEdit>
+          </FormEdit>
+        </Modal>
+
+        <Modal
+          width="90%"
+          isOpen={modalPreviewAvatar}
+          onClose={toggleModalPreviewAvatar}
+        >
+          <PreviewAvatar
+            src={user?.avatarUrl || "https://i.imgur.com/HYrZqHy.jpg"}
+            alt=""
+          />
+        </Modal>
       </Container>
-
-      <Modal
-        width="75%"
-        height="120px"
-        isOpen={modalEditAvatar}
-        onClose={toggleModalEditAvatar}
-      >
-        <FormEdit onSubmit={handleUpdateAvatar}>
-          <InputEdit
-            name="ava"
-            value={avatarUrl}
-            type="text"
-            placeholder="URL da imagem"
-            onChange={(e) => {
-              setAvatarUrl(e.target.value);
-            }}
-            required
-          />
-          <ButtonEdit>Salvar</ButtonEdit>
-        </FormEdit>
-      </Modal>
-
-      <Modal
-        width="75%"
-        height="120px"
-        isOpen={modalEditCover}
-        onClose={toggleModalEditCover}
-      >
-        <FormEdit onSubmit={handleUpdateCover}>
-          <InputEdit
-            name="avatarUrl"
-            value={coverUrl}
-            type="text"
-            placeholder="URL do cover"
-            onChange={(e) => {
-              setCoverUrl(e.target.value);
-            }}
-            required
-          />
-          <ButtonEdit>Salvar</ButtonEdit>
-        </FormEdit>
-      </Modal>
     </LayoutDefault>
   );
 };
