@@ -1,4 +1,8 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
+
+interface FrienndshipButtonProps {
+  $relationship: number;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -119,6 +123,38 @@ export const Total = styled.div`
       text-decoration: underline;
       cursor: pointer;
     }
+  }
+`;
+
+export const FriendshipArea = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+`;
+
+export const FriendshipButton = styled.button<FrienndshipButtonProps>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: ${({ $relationship }) => {
+    if ($relationship === 1 || $relationship === 2)
+      return css`var(--emerald-600)`;
+    if ($relationship === 3) return css`var(--red-500)`;
+    if ($relationship === 4) return css`var(--blue-600)`;
+  }};
+
+  color: var(--white);
+  border: 0;
+  outline: 0;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: 0.15s all;
+
+  cursor: pointer;
+
+  &:hover {
+    color: var(--zinc-100);
+    filter: brightness(90%);
   }
 `;
 
