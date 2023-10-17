@@ -1,5 +1,5 @@
 import { useState, useCallback, FormEvent } from "react";
-import { ThumbsUp, ChatCircleText } from "phosphor-react";
+import { ThumbsUp, ChatCircleText, DotsThree, Trash } from "phosphor-react";
 import { toast } from "react-toastify";
 import moment from "moment";
 
@@ -37,7 +37,11 @@ import {
   CommentArea,
   CommentForm,
   Comments,
+  OptionsArea,
+  BoxOptions,
+  Option,
 } from "./styles";
+import { deletePost } from "../../services/posts";
 
 interface PostProps {
   authorId: string;
@@ -50,6 +54,7 @@ interface PostProps {
   comments: IComment[];
   reactions: IReaction[];
   publishedAt: string;
+  onDeletePost(id: string): void;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -63,6 +68,7 @@ const Post: React.FC<PostProps> = ({
   comments = [],
   reactions = [],
   publishedAt,
+  onDeletePost,
 }) => {
   const { user, me } = useAuthentication();
 
@@ -77,6 +83,8 @@ const Post: React.FC<PostProps> = ({
   );
 
   const [modalReactions, setModalReactions] = useState(false);
+
+  const [boxOptions, setBoxOptions] = useState(false);
 
   const handleCreateComment = useCallback(
     async (e: FormEvent) => {
@@ -168,6 +176,21 @@ const Post: React.FC<PostProps> = ({
     }
   }, []);
 
+  const handleDeletePost = useCallback(async () => {
+    try {
+      const { result, message } = await deletePost({ id: postId });
+
+      if (result === "success") {
+        onDeletePost(postId);
+        toast.success(message);
+      }
+
+      if (result === "error") toast.error(message);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }, [postId, onDeletePost]);
+
   function toggleReaction() {
     if (userReacted) {
       const reaction = postReactions.find(
@@ -195,8 +218,25 @@ const Post: React.FC<PostProps> = ({
     setModalReactions(!modalReactions);
   }
 
+  function toggleBoxOptions() {
+    setBoxOptions(!boxOptions);
+  }
+
   return (
     <Container>
+      {authorId === user?.id && (
+        <OptionsArea>
+          <DotsThree size={24} weight="bold" onClick={toggleBoxOptions} />
+
+          <BoxOptions $boxOptions={boxOptions}>
+            <Option onClick={handleDeletePost}>
+              <Trash size={24} weight="fill" />
+              Editar
+            </Option>
+          </BoxOptions>
+        </OptionsArea>
+      )}
+
       <Header>
         <Author>
           <AvatarSquare

@@ -36,6 +36,9 @@ const Feed: React.FC = () => {
     });
   };
 
+  const handleRemovePost = (id: string) =>
+    setPosts((prevState) => prevState.filter((post) => post.id !== id));
+
   useEffect(() => {
     handleListAllPosts();
   }, [handleListAllPosts]);
@@ -61,6 +64,7 @@ const Feed: React.FC = () => {
               comments={post.comments}
               reactions={post.reactions}
               publishedAt={post.publishedAt}
+              onDeletePost={handleRemovePost}
             />
           ))}
         </Posts>
