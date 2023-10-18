@@ -1,4 +1,4 @@
-import { useState, useCallback, FormEvent } from "react";
+import { useState, useEffect, useRef, useCallback, FormEvent } from "react";
 import { ThumbsUp, ChatCircleText, DotsThree, Trash } from "phosphor-react";
 import { toast } from "react-toastify";
 import moment from "moment";
@@ -85,6 +85,24 @@ const Post: React.FC<PostProps> = ({
   const [modalReactions, setModalReactions] = useState(false);
 
   const [boxOptions, setBoxOptions] = useState(false);
+
+  const boxOptionsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        boxOptionsRef.current &&
+        !boxOptionsRef.current.contains(event.target as Node)
+      )
+        setBoxOptions(false);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleCreateComment = useCallback(
     async (e: FormEvent) => {
@@ -228,7 +246,7 @@ const Post: React.FC<PostProps> = ({
         <OptionsArea>
           <DotsThree size={24} weight="bold" onClick={toggleBoxOptions} />
 
-          <BoxOptions $boxOptions={boxOptions}>
+          <BoxOptions ref={boxOptionsRef} $boxOptions={boxOptions}>
             <Option onClick={handleDeletePost}>
               <Trash size={24} weight="fill" />
               Editar
